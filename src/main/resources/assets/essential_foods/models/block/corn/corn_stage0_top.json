@@ -1,0 +1,6 @@
+{
+  "parent": "essential_foods:block/crop_cross",
+  "textures": {
+    "cross": "essential_foods:block/corn_stage0_top"
+  }
+}

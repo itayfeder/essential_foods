@@ -1,0 +1,6 @@
+{
+  "parent": "essential_foods:block/crop_block",
+  "textures": {
+    "crop": "essential_foods:block/rice_stage1"
+  }
+}

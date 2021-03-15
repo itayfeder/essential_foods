@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "essential_foods:item/unmilled_rice"
+  }
+}

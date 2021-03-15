@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "essential_foods:block/mill/mill",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "essential_foods:block/mill/mill"
+    },
+    "facing=south": {
+      "model": "essential_foods:block/mill/mill",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "essential_foods:block/mill/mill",
+      "y": 270
+    }
+  }
+}
