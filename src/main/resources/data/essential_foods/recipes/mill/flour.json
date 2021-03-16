@@ -1,0 +1,10 @@
+{
+  "type": "essential_foods:mill",
+  "output": {
+    "item": "essential_foods:flour"
+  },
+
+  "input": {
+    "item": "minecraft:wheat"
+  }
+}

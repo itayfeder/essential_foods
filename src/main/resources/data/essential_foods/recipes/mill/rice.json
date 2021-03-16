@@ -1,0 +1,11 @@
+{
+  "type": "essential_foods:mill",
+  "output": {
+    "item": "essential_foods:rice"
+  },
+
+  "input": {
+    "item": "essential_foods:unmilled_rice"
+  }
+}
+
