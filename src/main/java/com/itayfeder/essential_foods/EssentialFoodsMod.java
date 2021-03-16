@@ -4,6 +4,7 @@ import com.itayfeder.essential_foods.client.screens.MillScreen;
 import com.itayfeder.essential_foods.common.creativetabs.ModTab;
 import com.itayfeder.essential_foods.init.BlockInit;
 import com.itayfeder.essential_foods.init.ContainerInit;
+import com.itayfeder.essential_foods.init.RecipeInit;
 import com.itayfeder.essential_foods.utils.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -41,6 +43,8 @@ public class EssentialFoodsMod
     public EssentialFoodsMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(IRecipeSerializer.class, RecipeInit::registerRecipeSerializers);
 
         RegistryHandler.Init();
 

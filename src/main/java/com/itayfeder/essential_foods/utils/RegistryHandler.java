@@ -1,9 +1,6 @@
 package com.itayfeder.essential_foods.utils;
 
-import com.itayfeder.essential_foods.init.BlockInit;
-import com.itayfeder.essential_foods.init.ContainerInit;
-import com.itayfeder.essential_foods.init.ItemInit;
-import com.itayfeder.essential_foods.init.TileEntityInit;
+import com.itayfeder.essential_foods.init.*;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class RegistryHandler {

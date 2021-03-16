@@ -1,156 +1,92 @@
 package com.itayfeder.essential_foods.common.tileentities;
 
+import com.itayfeder.essential_foods.EssentialFoodsMod;
 import com.itayfeder.essential_foods.common.containers.MillContainer;
+import com.itayfeder.essential_foods.common.recipes.mill.MillRecipe;
+import com.itayfeder.essential_foods.init.RecipeInit;
 import com.itayfeder.essential_foods.init.TileEntityInit;
-import com.itayfeder.essential_foods.utils.MillRecipes;
-import jdk.nashorn.internal.codegen.CompileUnit;
-import net.minecraft.block.AbstractFurnaceBlock;
+import com.itayfeder.essential_foods.utils.ItemHandler;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.DispenserContainer;
-import net.minecraft.item.Item;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.AbstractCookingRecipe;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-public class MillTileEntity extends LockableLootTileEntity implements ITickableTileEntity {
-    private NonNullList<ItemStack> stacks = NonNullList.withSize(2, ItemStack.EMPTY);
-    private int convertTime;
-    private int convertTimeTotal;
-    public final IIntArray millData = new IIntArray() {
-        public int get(int index) {
-            switch(index) {
-                case 0:
-                    return MillTileEntity.this.convertTime;
-                case 1:
-                    return MillTileEntity.this.convertTimeTotal;
-                default:
-                    return 0;
-            }
-        }
+public class MillTileEntity extends TileEntity implements ITickableTileEntity, INamedContainerProvider {
+    private ITextComponent customName;
+    private ItemHandler inventory;
+    public int convertTime;
+    public static int convertTimeTotal = 200;
 
-        public void set(int index, int value) {
-            switch(index) {
-                case 0:
-                    MillTileEntity.this.convertTime = value;
-                    break;
-                case 1:
-                    MillTileEntity.this.convertTimeTotal = value;
-            }
-
-        }
-
-        public int size() {
-            return 2;
-        }
-    };
 
 
     public MillTileEntity() {
         super(TileEntityInit.MILL_TILE.get());
+
+        this.inventory = new ItemHandler(2);
     }
 
+    @Override
     public void tick() {
-        boolean flag1 = false;
+        boolean dirty = false;
 
-        if (!this.world.isRemote) {
-            ItemStack itemstack = this.stacks.get(1);
-            if (!this.stacks.get(0).isEmpty()) {
-                if (this.canConvert(this.stacks.get(0))) {
-                    flag1 = true;
-                    if (itemstack.hasContainerItem())
-                        this.stacks.set(1, itemstack.getContainerItem());
-
-                }
-                if (this.canConvert(this.stacks.get(0))) {
-                    ++this.convertTime;
-                    if (this.convertTime == this.convertTimeTotal) {
-                        this.convertTime = 0;
-                        this.convertTimeTotal = 200;
-                        this.convert(this.stacks.get(0));
-                        flag1 = true;
-                    }
+        if (this.world != null && !this.world.isRemote) {
+            if (this.getRecipe(this.inventory.getStackInSlot(0)) != null) {
+                if (this.convertTime != this.convertTimeTotal) {
+                    this.convertTime++;
+                    dirty = true;
                 } else {
                     this.convertTime = 0;
-                }
-            } else if (this.convertTime > 0) {
-                this.convertTime = MathHelper.clamp(this.convertTime - 2, 0, this.convertTimeTotal);
-            }
-
-            if (flag1) {
-                this.markDirty();
-            }
-
-        }
-    }
-
-    protected boolean canConvert(ItemStack stack) {
-        if (!this.stacks.get(0).isEmpty() && MillRecipes.RECIPES.containsKey(stack.getItem())) {
-            Item itemstack = MillRecipes.RECIPES.get(stack.getItem());
-            if (itemstack == null) {
-                return false;
-            } else {
-                ItemStack itemstack1 = this.stacks.get(1);
-                if (itemstack1.isEmpty()) {
-                    return true;
-                } else if (itemstack1.getItem() != itemstack) {
-                    return false;
-                } else if (itemstack1.getCount() + 1 <= this.getInventoryStackLimit() && itemstack1.getCount() + 1 <= itemstack1.getMaxStackSize()) { // Forge fix: make furnace respect stack sizes in furnace recipes
-                    return true;
-                } else {
-                    return itemstack1.getCount() + 1 <= itemstack.getMaxStackSize(); // Forge fix: make furnace respect stack sizes in furnace recipes
+                    ItemStack output = this.getRecipe(this.inventory.getStackInSlot(0)).getRecipeOutput();
+                    this.inventory.insertItem(1, output.copy(), false);
+                    this.inventory.decrStackSize(0, 1);
+                    dirty = true;
                 }
             }
-        } else {
-            return false;
+        }
+
+        if (dirty) {
+            this.markDirty();
+            this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(),
+                    Constants.BlockFlags.BLOCK_UPDATE);
         }
     }
 
-    private void convert(ItemStack stack) {
-        if (MillRecipes.RECIPES.containsKey(stack.getItem()) && this.canConvert(stack)) {
-            ItemStack itemstack = this.stacks.get(0);
-            Item itemstack1 = MillRecipes.RECIPES.get(stack.getItem());
-            ItemStack itemstack2 = this.stacks.get(1);
-            if (itemstack2.isEmpty()) {
-                this.stacks.set(1, itemstack1.getDefaultInstance().copy());
-            } else if (itemstack2.getItem() == itemstack1) {
-                itemstack2.grow(itemstack1.getDefaultInstance().getCount());
-            }
 
-            itemstack.shrink(1);
-        }
-    }
 
     public void setInventorySlotContents(int index, ItemStack stack) {
-        ItemStack itemstack = this.stacks.get(index);
+        ItemStack itemstack = this.inventory.getStackInSlot(index);
         boolean flag = !stack.isEmpty() && stack.isItemEqual(itemstack) && ItemStack.areItemStackTagsEqual(stack, itemstack);
-        this.stacks.set(index, stack);
-        if (stack.getCount() > this.getInventoryStackLimit()) {
-            stack.setCount(this.getInventoryStackLimit());
-        }
+        this.inventory.setStackInSlot(index, stack);
 
         if (index == 0 && !flag) {
             this.convertTimeTotal = 200;
@@ -165,54 +101,106 @@ public class MillTileEntity extends LockableLootTileEntity implements ITickableT
         return 2;
     }
 
-    public int addItemStack(ItemStack stack) {
-        for(int i = 0; i < this.stacks.size(); ++i) {
-            if (this.stacks.get(i).isEmpty()) {
-                this.setInventorySlotContents(i, stack);
-                return i;
-            }
+    public void read(BlockState state, CompoundNBT compound) {
+        super.read(state, compound);
+        if (compound.contains("CustomName", Constants.NBT.TAG_STRING)) {
+            this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("CustomName"));
         }
-
-        return -1;
-    }
-
-    public void read(BlockState state, CompoundNBT nbt) {
-        super.read(state, nbt);
-        this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        this.convertTime = nbt.getInt("ConvertTime");
-        this.convertTimeTotal = nbt.getInt("ConvertTimeTotal");
-        if (!this.checkLootAndRead(nbt)) {
-            ItemStackHelper.loadAllItems(nbt, this.stacks);
-        }
+        NonNullList<ItemStack> inv = NonNullList.<ItemStack>withSize(this.inventory.getSlots(), ItemStack.EMPTY);
+        ItemStackHelper.loadAllItems(compound, inv);
+        this.inventory.setNonNullList(inv);
+        this.convertTime = compound.getInt("ConvertTime");
 
     }
 
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
-        compound.putInt("ConvertTime", this.convertTime);
-        compound.putInt("ConvertTimeTotal", this.convertTimeTotal);
-        if (!this.checkLootAndWrite(compound)) {
-            ItemStackHelper.saveAllItems(compound, this.stacks);
+        if (this.customName != null) {
+            compound.putString("CustomName", ITextComponent.Serializer.toJson(this.customName));
         }
+        compound.putInt("ConvertTime", this.convertTime);
+        ItemStackHelper.saveAllItems(compound, this.inventory.toNonNullList());
 
         return compound;
     }
 
-    protected NonNullList<ItemStack> getItems() {
-        return this.stacks;
+    public void setCustomName(ITextComponent name) {
+        this.customName = name;
     }
 
-    protected void setItems(NonNullList<ItemStack> itemsIn) {
-        this.stacks = itemsIn;
+    public ITextComponent getName() {
+        return this.customName != null ? this.customName : this.getDefaultName();
     }
 
-    protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.mill");
+    private ITextComponent getDefaultName() {
+        return new TranslationTextComponent("container." + EssentialFoodsMod.MOD_ID + ".mill");
     }
 
-    protected Container createMenu(int id, PlayerInventory player) {
-        return new MillContainer(id, player,this, millData);
+    @Override
+    public ITextComponent getDisplayName() {
+        return this.getName();
     }
 
+    @Nullable
+    public ITextComponent getCustomName() {
+        return this.customName;
+    }
 
+    @Override
+    public Container createMenu(final int windowID, final PlayerInventory playerInv, final PlayerEntity playerIn) {
+        return new MillContainer(windowID, playerInv, this);
+    }
+
+    @Nullable
+    private MillRecipe getRecipe(ItemStack stack) {
+        if (stack == null) {
+            return null;
+        }
+
+        Set<IRecipe<?>> recipes = findRecipesByType(RecipeInit.MILL_RECIPE, this.world);
+        for (IRecipe<?> iRecipe : recipes) {
+            MillRecipe recipe = (MillRecipe) iRecipe;
+            if (recipe.matches(new RecipeWrapper(this.inventory), this.world)) {
+                return recipe;
+            }
+        }
+
+        return null;
+    }
+
+    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> typeIn, World world) {
+        return world != null ? world.getRecipeManager().getRecipes().stream()
+                .filter(recipe -> recipe.getType() == typeIn).collect(Collectors.toSet()) : Collections.emptySet();
+    }
+
+    @SuppressWarnings("resource")
+    @OnlyIn(Dist.CLIENT)
+    public static Set<IRecipe<?>> findRecipesByType(IRecipeType<?> typeIn) {
+        ClientWorld world = Minecraft.getInstance().world;
+        return world != null ? world.getRecipeManager().getRecipes().stream()
+                .filter(recipe -> recipe.getType() == typeIn).collect(Collectors.toSet()) : Collections.emptySet();
+    }
+
+    public static Set<ItemStack> getAllRecipeInputs(IRecipeType<?> typeIn, World worldIn) {
+        Set<ItemStack> inputs = new HashSet<ItemStack>();
+        Set<IRecipe<?>> recipes = findRecipesByType(typeIn, worldIn);
+        for (IRecipe<?> recipe : recipes) {
+            NonNullList<Ingredient> ingredients = recipe.getIngredients();
+            ingredients.forEach(ingredient -> {
+                for (ItemStack stack : ingredient.getMatchingStacks()) {
+                    inputs.add(stack);
+                }
+            });
+        }
+        return inputs;
+    }
+
+    public final IItemHandlerModifiable getInventory() {
+        return this.inventory;
+    }
+
+    @Override
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(cap, LazyOptional.of(() -> this.inventory));
+    }
 }
