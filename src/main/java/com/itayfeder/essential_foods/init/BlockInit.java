@@ -1,10 +1,7 @@
 package com.itayfeder.essential_foods.init;
 
 import com.itayfeder.essential_foods.EssentialFoodsMod;
-import com.itayfeder.essential_foods.common.blocks.CornPlantBlock;
-import com.itayfeder.essential_foods.common.blocks.MillBlock;
-import com.itayfeder.essential_foods.common.blocks.RicePlantBlock;
-import com.itayfeder.essential_foods.common.blocks.TomatoPlantBlock;
+import com.itayfeder.essential_foods.common.blocks.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -22,6 +19,9 @@ public class BlockInit {
     public static final RegistryObject<Block> MILL = BLOCKS.register("mill",
             () -> new MillBlock(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED).setRequiresTool().hardnessAndResistance(2.0F, 6.0F)));
 
+    //SALT MODULE
+    public static final RegistryObject<Block> SALT_ORE = BLOCKS.register("salt_ore",
+            () -> new ModOreBlock(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(3.0F, 3.0F)));
 
     //CORN MODULE
     public static final RegistryObject<Block> CORN_PLANT = BLOCKS.register("corn_plant",

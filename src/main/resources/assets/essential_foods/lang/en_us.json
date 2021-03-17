@@ -1,0 +1,30 @@
+{
+  "itemGroup.essential_foods": "Essential Foods",
+
+  "block.essential_foods.mill": "Mill",
+  "block.essential_foods.salt_ore": "Salt Ore",
+  "block.essential_foods.corn_plant": "Corn",
+  "block.essential_foods.rice_plant": "Rice",
+  "block.essential_foods.chocolate_cake": "Chocolate Cake",
+  "block.essential_foods.tomato_plant": "Tomato",
+
+  "item.essential_foods.mill": "Mill",
+  "item.essential_foods.mortar_and_pestle": "Mortar And Pestle",
+  "item.essential_foods.flour": "Flour",
+  "item.essential_foods.salt_ore": "Salt Ore",
+  "item.essential_foods.salt_crystal": "Salt Crystal",
+  "item.essential_foods.salt": "Salt",
+  "item.essential_foods.corn_seeds": "Corn Seeds",
+  "item.essential_foods.corn": "Corn",
+  "item.essential_foods.rice_shoots": "Rice Shoots",
+  "item.essential_foods.unmilled_rice": "Unmilled Rice",
+  "item.essential_foods.rice": "Rice",
+  "item.essential_foods.rice_bowl": "Rice Bowl",
+  "item.essential_foods.cocoa_powder": "Cocoa Powder",
+  "item.essential_foods.chocolate_milk": "Chocolate Milk",
+  "item.essential_foods.chocolate_cake": "Chocolate Cake",
+  "item.essential_foods.tomato_seeds": "Tomato Seeds",
+  "item.essential_foods.tomato": "Tomato",
+
+  "container.essential_foods.mill": "Mill"
+}

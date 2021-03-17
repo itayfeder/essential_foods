@@ -22,6 +22,17 @@ public class ItemInit {
     public static final RegistryObject<Item> FLOUR = ITEMS.register("flour",
             () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));
 
+    //SALT MODULE
+    public static final RegistryObject<BlockItem> SALT_ORE = ITEMS.register("salt_ore",
+            () -> new BlockItem(BlockInit.SALT_ORE.get(),
+                    new Item.Properties().group(EssentialFoodsMod.MOD_TAB)));
+
+    public static final RegistryObject<Item> SALT_CRYSTAL = ITEMS.register("salt_crystal",
+            () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));
+
+    public static final RegistryObject<Item> SALT = ITEMS.register("salt",
+            () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));
+
     //CORN MODULE
     public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds",
             () -> new BlockNamedItem(BlockInit.CORN_PLANT.get(), (new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));

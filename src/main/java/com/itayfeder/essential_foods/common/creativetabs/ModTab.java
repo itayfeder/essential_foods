@@ -7,7 +7,7 @@ import net.minecraft.util.NonNullList;
 
 public class ModTab extends ItemGroup {
     public ModTab() {
-        super("modtab");
+        super("essential_foods");
     }
 
     @Override

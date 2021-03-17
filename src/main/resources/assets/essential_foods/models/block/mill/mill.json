@@ -4,7 +4,9 @@
 	"ambientocclusion": true,
 	"textures": {
 		"1": "essential_foods:block/mill_front",
-		"2": "block/bricks",
+		"2": "essential_foods:block/mill_side",
+		"3": "block/bricks",
+		"4": "block/spruce_planks",
 		"particle": "essential_foods:block/mill_front",
 		"main": "essential_foods:block/mill"
 	},
@@ -18,8 +20,8 @@
 				"east": {"uv": [0, 0, 16, 16], "texture": "#2", "cullface": "east"},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#2", "cullface": "south"},
 				"west": {"uv": [0, 0, 16, 16], "texture": "#2", "cullface": "west"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#2", "cullface": "up"},
-				"down": {"uv": [0, 0, 16, 16], "texture": "#2", "cullface": "down"}
+				"up": {"uv": [0, 0, 16, 16], "texture": "#3", "cullface": "up"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4", "cullface": "down"}
 			}
 		},
 		{
