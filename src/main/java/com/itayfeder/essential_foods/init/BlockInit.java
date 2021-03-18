@@ -19,6 +19,9 @@ public class BlockInit {
     public static final RegistryObject<Block> MILL = BLOCKS.register("mill",
             () -> new MillBlock(AbstractBlock.Properties.create(Material.ROCK, MaterialColor.RED).setRequiresTool().hardnessAndResistance(2.0F, 6.0F)));
 
+    public static final RegistryObject<Block> SEED_PRODUCER = BLOCKS.register("seed_producer",
+            () -> new SeedProducerBlock(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(3.5F)));
+
     //SALT MODULE
     public static final RegistryObject<Block> SALT_ORE = BLOCKS.register("salt_ore",
             () -> new ModOreBlock(AbstractBlock.Properties.create(Material.ROCK).setRequiresTool().hardnessAndResistance(3.0F, 3.0F)));

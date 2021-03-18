@@ -1,0 +1,10 @@
+{
+  "type": "essential_foods:seed_producer",
+  "seed": {
+    "item": "minecraft:beetroot_seeds"
+  },
+
+  "crop": {
+    "item": "minecraft:beetroot"
+  }
+}

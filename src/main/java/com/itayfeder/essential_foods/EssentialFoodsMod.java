@@ -1,6 +1,7 @@
 package com.itayfeder.essential_foods;
 
 import com.itayfeder.essential_foods.client.screens.MillScreen;
+import com.itayfeder.essential_foods.client.screens.SeedProducerScreen;
 import com.itayfeder.essential_foods.common.creativetabs.ModTab;
 import com.itayfeder.essential_foods.init.BlockInit;
 import com.itayfeder.essential_foods.init.ContainerInit;
@@ -58,6 +59,7 @@ public class EssentialFoodsMod
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         ScreenManager.registerFactory(ContainerInit.MILL_CONTAINER.get(), MillScreen::new);
+        ScreenManager.registerFactory(ContainerInit.SEED_PRODUCER_CONTAINER.get(), SeedProducerScreen::new);
 
         RenderTypeLookup.setRenderLayer(BlockInit.CORN_PLANT.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.RICE_PLANT.get(), RenderType.getCutout());

@@ -16,6 +16,10 @@ public class ItemInit {
             () -> new BlockItem(BlockInit.MILL.get(),
                     new Item.Properties().group(EssentialFoodsMod.MOD_TAB)));
 
+    public static final RegistryObject<BlockItem> SEED_PRODUCER = ITEMS.register("seed_producer",
+            () -> new BlockItem(BlockInit.SEED_PRODUCER.get(),
+                    new Item.Properties().group(EssentialFoodsMod.MOD_TAB)));
+
     public static final RegistryObject<Item> MORTAR_AND_PESTLE = ITEMS.register("mortar_and_pestle",
             () -> new MortarAndPestleItem((new Item.Properties().group(EssentialFoodsMod.MOD_TAB).maxStackSize(1))));
 
@@ -50,6 +54,9 @@ public class ItemInit {
     public static final RegistryObject<Item> RICE = ITEMS.register("rice",
             () -> new Item((new Item.Properties()).group(EssentialFoodsMod.MOD_TAB).food((new Food.Builder()).hunger(1).saturation(0.2F).fastToEat().build())));
 
+    public static final RegistryObject<Item> RICE_BOWL = ITEMS.register("rice_bowl",
+            () -> new SoupItem((new Item.Properties()).maxStackSize(1).group(EssentialFoodsMod.MOD_TAB).food((new Food.Builder()).hunger(6).saturation(0.6F).build())));
+
     //COCOA MODULE
     public static final RegistryObject<Item> COCOA_POWDER = ITEMS.register("cocoa_powder",
             () -> new Item((new Item.Properties()).group(EssentialFoodsMod.MOD_TAB)));
@@ -67,5 +74,7 @@ public class ItemInit {
 
     public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato",
             () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB)).food((new Food.Builder()).hunger(3).saturation(0.8F).build())));
+
+
 
 }

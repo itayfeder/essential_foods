@@ -13,7 +13,7 @@
               "source": "block_entity"
             }
           ],
-          "name": "essential_foods:mill"
+          "name": "essential_foods:seed_producer"
         }
       ],
       "conditions": [
