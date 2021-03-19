@@ -44,7 +44,7 @@ public class CornPlantBlock extends CropsBlock {
     }
 
     protected IItemProvider getSeedsItem() {
-        return ItemInit.CORN_SEEDS.get();
+        return ItemInit.CORN_KERNELS.get();
     }
 
 

@@ -4,6 +4,8 @@ import com.itayfeder.essential_foods.EssentialFoodsMod;
 import com.itayfeder.essential_foods.common.items.MortarAndPestleItem;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.*;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -38,11 +40,11 @@ public class ItemInit {
             () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));
 
     //CORN MODULE
-    public static final RegistryObject<Item> CORN_SEEDS = ITEMS.register("corn_seeds",
-            () -> new BlockNamedItem(BlockInit.CORN_PLANT.get(), (new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));
-
     public static final RegistryObject<Item> CORN = ITEMS.register("corn",
             () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB)).food((new Food.Builder()).hunger(2).saturation(0.5F).build())));
+
+    public static final RegistryObject<Item> CORN_KERNELS = ITEMS.register("corn_kernels",
+            () -> new BlockNamedItem(BlockInit.CORN_PLANT.get(), (new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));
 
     //RICE MODULE
     public static final RegistryObject<Item> RICE_SHOOTS = ITEMS.register("rice_shoots",
@@ -75,6 +77,12 @@ public class ItemInit {
     public static final RegistryObject<Item> TOMATO = ITEMS.register("tomato",
             () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB)).food((new Food.Builder()).hunger(3).saturation(0.8F).build())));
 
+    //CHILI MODULE
+    public static final RegistryObject<Item> CHILI_SEEDS = ITEMS.register("chili_seeds",
+            () -> new BlockNamedItem(BlockInit.CHILI_PLANT.get(), (new Item.Properties().group(EssentialFoodsMod.MOD_TAB))));
 
+    public static final RegistryObject<Item> CHILI = ITEMS.register("chili",
+            () -> new Item((new Item.Properties().group(EssentialFoodsMod.MOD_TAB))
+                    .food((new Food.Builder()).hunger(2).saturation(0.5F)/*.effect(new EffectInstance(EffectInit.SPICY.get(), 600, 0), 1.0F)*/.build())));
 
 }

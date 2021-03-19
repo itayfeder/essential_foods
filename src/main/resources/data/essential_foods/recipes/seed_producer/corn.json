@@ -1,7 +1,7 @@
 {
   "type": "essential_foods:seed_producer",
   "seed": {
-    "item": "essential_foods:corn_seeds"
+    "item": "essential_foods:corn_kernels"
   },
 
   "crop": {

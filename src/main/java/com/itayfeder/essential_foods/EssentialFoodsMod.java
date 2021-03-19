@@ -65,5 +65,6 @@ public class EssentialFoodsMod
         RenderTypeLookup.setRenderLayer(BlockInit.RICE_PLANT.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlockInit.MILL.get(), RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(BlockInit.TOMATO_PLANT.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(BlockInit.CHILI_PLANT.get(), RenderType.getCutout());
     }
 }

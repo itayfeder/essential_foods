@@ -41,4 +41,9 @@ public class BlockInit {
     //TOMATO MODULE
     public static final RegistryObject<Block> TOMATO_PLANT = BLOCKS.register("tomato_plant",
             () -> new TomatoPlantBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.CROP)));
+
+    //CHILI MODULE
+    public static final RegistryObject<Block> CHILI_PLANT = BLOCKS.register("chili_plant",
+            () -> new ChiliPlantBlock(AbstractBlock.Properties.create(Material.PLANTS).doesNotBlockMovement().zeroHardnessAndResistance().sound(SoundType.CROP)));
+
 }

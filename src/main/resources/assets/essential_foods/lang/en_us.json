@@ -8,6 +8,7 @@
   "block.essential_foods.rice_plant": "Rice",
   "block.essential_foods.chocolate_cake": "Chocolate Cake",
   "block.essential_foods.tomato_plant": "Tomato",
+  "block.essential_foods.chili_plant": "Chili",
 
   "item.essential_foods.mill": "Mill",
   "item.essential_foods.seed_producer": "Seed Producer",
@@ -16,8 +17,8 @@
   "item.essential_foods.salt_ore": "Salt Ore",
   "item.essential_foods.salt_crystal": "Salt Crystal",
   "item.essential_foods.salt": "Salt",
-  "item.essential_foods.corn_seeds": "Corn Seeds",
   "item.essential_foods.corn": "Corn",
+  "item.essential_foods.corn_kernels": "Corn Kernels",
   "item.essential_foods.rice_shoots": "Rice Shoots",
   "item.essential_foods.unmilled_rice": "Unmilled Rice",
   "item.essential_foods.rice": "Rice",
@@ -27,7 +28,11 @@
   "item.essential_foods.chocolate_cake": "Chocolate Cake",
   "item.essential_foods.tomato_seeds": "Tomato Seeds",
   "item.essential_foods.tomato": "Tomato",
+  "item.essential_foods.chili_seeds": "Chili Seeds",
+  "item.essential_foods.chili": "Chili",
 
   "container.essential_foods.mill": "Mill",
-  "container.essential_foods.seed_producer": "Seed Producer"
+  "container.essential_foods.seed_producer": "Seed Producer",
+
+  "effect.spicy": "Spicy"
 }

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "essential_foods:block/seed_producer_top",
+    "front": "essential_foods:block/seed_producer_front",
+    "bottom": "essential_foods:block/seed_producer_front",
+    "side": "essential_foods:block/seed_producer_side"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "essential_foods:block/seed_producer/seed_producer",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "essential_foods:block/seed_producer/seed_producer"
+    },
+    "facing=south": {
+      "model": "essential_foods:block/seed_producer/seed_producer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "essential_foods:block/seed_producer/seed_producer",
+      "y": 270
+    }
+  }
+}
